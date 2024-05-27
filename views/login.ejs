@@ -1,0 +1,17 @@
+<%- include('layouts/boilerplate',{toast:toast}) -%>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login</title>
+</head>
+<body>
+  Login page
+  <form action="/users/login" method="post">
+    <input type="email" name="email" />
+    <input type="password" name="password" />
+    <button>submit</button>
+  </form>
+  <div>
+    <a href="/users/signup">Sign Up</a>
+  </div>
+</body>

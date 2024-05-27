@@ -1,0 +1,12 @@
+<%- include('layouts/boilerplate', {toast: toast } ) -%>
+<div>
+  <% if(!username) {%>
+  <a href="/users/login">login</a>
+  <% } else {%>
+  <h2>Welcome <%= username %>,</h2>
+  <%}%> Home page <% for(let blog of blogs) { %>
+  <li><%= blog %></li>
+  <% } %>
+
+  <a href="Writeblog">write a blog</a>
+</div>

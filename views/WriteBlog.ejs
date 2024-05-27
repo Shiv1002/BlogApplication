@@ -1,0 +1,14 @@
+<%- include('layouts/boilerplate', {toast: toast } ) -%>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>write your blog</title>
+</head>
+<body>
+  <form action="http://localhost:3000/blogs/postBlog" method="post">
+    <input type="text" name="blogTitle" id="title" required />
+    <textarea name="blogContent" id="BlogContent" required></textarea>
+    <button>Submit</button>
+  </form>
+</body>

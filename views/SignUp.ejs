@@ -1,0 +1,64 @@
+<%- include('layouts/boilerplate',{toast:toast}) -%>
+
+<form action="/users/createAccount" method="post">
+  <input type="text" name="name" required placeholder="name" />
+  <input type="email" name="email" required placeholder="email" />
+
+  <input
+    id="username"
+    type="text"
+    name="username"
+    required
+    onchange="checkUsernameExist()"
+    placeholder="username"
+  />
+  <select name="gender" id="" required>
+    <option>male</option>
+    <option>female</option>
+    <option>others</option>
+  </select>
+
+  <input type="password" name="password" required placeholder="password" />
+  <button>submit</button>
+</form>
+
+<script>
+  function checkUsernameThrottled() {
+    // to check already invked func
+    let timer = null;
+    return () => {
+      let uname = document.getElementById("username").value;
+      if (uname == "") return;
+      // no execution if already executed
+      if (!timer) {
+        timer = setTimeout(() => {
+          console.log("Checking username...", uname);
+          fetch("http://localhost:3000/users/checkusername", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              searchTerm: uname,
+            }),
+          })
+            .then((res) => res.json())
+            .then((response) => {
+              if (response.userExist) {
+                alert("userExist");
+              } else {
+                alert("user not Exist");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error.message);
+            });
+
+          timer = null;
+        }, 2000); //2 sec timeout
+      }
+    };
+  }
+
+  let checkUsernameExist = checkUsernameThrottled();
+</script>

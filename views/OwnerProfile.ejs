@@ -1,0 +1,14 @@
+<%- include("layouts/Profile",{user:user}) -%>
+
+<div>Hello</div>
+
+<% if (isOwner) { %>
+
+<button>Update</button>
+<button>Delete</button>
+
+<%} else {%>
+<a href="users/login">Login</a>
+<% } %>
+
+<!-- this page need isOnwer:boolean and user:object as props -->
