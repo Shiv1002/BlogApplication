@@ -1,18 +1,15 @@
+import { Blog } from "../models/BlogModel.js";
 import User from "../models/UserModel.js";
 import ErrorHandler from "../utils/ErrorHandler.js";
 import isEmail from "validator/lib/isEmail.js";
-
+import appclass from "../data/App.js";
 const setSessionUser = (user, req, res, next) => {
   req.session.userid = user._id;
   req.session.username = user.username;
   req.isAuthenticated = true;
   // console.log(req.session);
-  if (user.role === "admin") {
-    req.session.role = "admin";
-    return res.redirect("/admin");
-  }
-  req.session.role = "user";
 };
+
 // const userbody = ['name', 'username', 'email', 'password', 'gender']
 export const login = async (req, res, next) => {
   //sanitize inputs
@@ -52,11 +49,17 @@ export const login = async (req, res, next) => {
       toast: { text: "Password not matched", type: "error" },
     });
   }
-  setSessionUser(user, req, res, next);
 
+  setSessionUser(user, req, res, next);
+  if (user.role === "admin") {
+    req.session.role = "admin";
+    return res.redirect("/admin");
+  } else {
+    req.session.role = "user";
+  }
   // redirect to home page
   req.flash("info", { text: "Logged In successfully!!", type: "success" });
-  res.redirect("/");
+  return res.redirect("/");
 };
 
 export const getProfile = async (req, res, next) => {
@@ -124,7 +127,7 @@ export const createAccount = async (req, res, next) => {
   let username = String(req.body.username);
   let email = String(req.body.email);
 
-  // console.log(req.body);
+  // console.log(req.body, req.file);
 
   // check if email or user already exist
   let user = await User.find({
@@ -139,6 +142,7 @@ export const createAccount = async (req, res, next) => {
 
   let new_user = await User({
     ...req.body,
+    photo: req.body.url,
     role: "user",
   });
   await new_user.save((err, user) => {
@@ -156,7 +160,7 @@ export const createAccount = async (req, res, next) => {
       // set current user session
       setSessionUser(user, req, res, next);
 
-      return res.render("OwnerProfile", { user: user, isOwner: true });
+      return res.redirect("/login");
     }
   });
 
@@ -189,12 +193,4 @@ export const deleteAccount = async (req, res, next) => {
     .catch((e) => {
       return next(new ErrorHandler(e.message, 404));
     });
-};
-
-export const admin = (req, res, next) => {
-  if (req.role !== "admin") {
-    return next(new ErrorHandler("Unauthorized access", 401));
-  }
-  console.log("redirecting to admin");
-  // res.redirect('admin')
 };

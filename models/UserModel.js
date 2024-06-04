@@ -36,10 +36,10 @@ export const userSchema = mongoose.Schema(
       type: String,
       validator: [validator.isEmail, "Enter valid email"],
     },
-    gender: {
+    occupation: {
       type: String,
-      required: [true, "gender is required"],
-      enum: ["male", "female", "others"],
+      required: [true, "occupation is required"],
+      enum: ["Professional", "Student", "Other"],
     },
     password: {
       required: [true, "password is required"],
