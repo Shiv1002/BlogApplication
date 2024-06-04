@@ -8,6 +8,7 @@ export const errorMiddleware = (err, req, res, next) => {
   //   success: false,
   //   message: err.message,
   // })
-  console.log(err.message);
-  return res.redirect("/error", (err, req, res, next));
+  console.log(err.message, err.statusCode);
+  req.flash("error", err.message);
+  return res.redirect("/error");
 };

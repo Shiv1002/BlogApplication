@@ -6,6 +6,8 @@ export const connectDB = () => {
       dbName: "BlogApplication",
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
     })
     .then(() => {
       console.log(`Connection with ${process.env.MONGODB_URI} success🔥`);

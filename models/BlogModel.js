@@ -7,6 +7,10 @@ const blogSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
+    image_url: {
+      type: String,
+      required: true,
+    },
     author: {
       type: String,
       required: true,
@@ -25,13 +29,16 @@ const blogSchema = mongoose.Schema(
     },
     likes: {
       type: Number,
+      default: 0,
       min: 0,
     },
     dislikes: {
       type: Number,
+      default: 0,
       min: 0,
     },
     views: {
+      default: 0,
       type: Number,
       min: 0,
     },
