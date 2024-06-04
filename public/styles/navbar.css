@@ -1,0 +1,54 @@
+nav {
+  width: 100%;
+  background-color: rgb(122 121 121 / 13%);
+  backdrop-filter: blur(30px);
+  position: sticky;
+  font-weight: 600;
+  top: 0;
+}
+
+@font-face {
+  font-family: "Sunday";
+  src: url("../fonts/sunday/Sunday.otf") format("opentype");
+}
+
+nav a,
+nav a:hover {
+  text-decoration: none;
+}
+nav .nav-group {
+  padding: 0.6rem;
+  border-radius: 2rem;
+  background-color: rgba(251, 251, 251, 0.876);
+  margin: 0 10px;
+}
+nav .nav-group:hover {
+  background-color: rgba(251, 251, 251, 0.627);
+}
+
+.landing-title {
+  position: absolute;
+  font-size: 2.4em;
+  color: white;
+  font-family: "Sunday", sans-serif;
+  letter-spacing: 4px;
+}
+nav > div {
+  display: flex;
+  height: 5.5rem;
+  justify-content: center;
+  align-items: center;
+}
+nav > div > * {
+  padding: 15px;
+}
+.user-nav img {
+  width: 2rem;
+}
+.user-nav {
+  margin: 0 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+}

@@ -1,0 +1,53 @@
+header {
+  font-size: x-large;
+  margin-bottom: 0.3rem;
+}
+.blogCard {
+  width: 400px;
+  height: 50vh;
+  background-color: transparent;
+
+  overflow-y: auto;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.blogCard .pic {
+  width: 100%;
+  flex-grow: 1;
+  max-height: 70%;
+  background-color: rgb(195, 195, 195);
+  object-fit: cover;
+  border-radius: 1rem;
+}
+.metadata {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* height: 20%; */
+}
+header {
+  font-size: x-large;
+}
+a {
+  color: #242424;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.metadata {
+  font-weight: 700;
+}
+.pubdetails {
+  font-size: 1em;
+}
+
+.author-link {
+  text-decoration: none;
+}
+.author-link:hover {
+  text-decoration: underline;
+}

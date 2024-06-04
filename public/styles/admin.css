@@ -1,0 +1,159 @@
+* {
+  transition: all 0.5s;
+}
+
+@font-face {
+  font-family: "poppins";
+  src: url("../fonts/poppins/Poppins-Regular.ttf") format("truetype");
+}
+body {
+  font-family: "poppins", sans-serif !important;
+  margin: 0;
+  padding: 0;
+  background: url("../svg/page-turner.svg") center center;
+  background-size: cover;
+
+  font-size: large;
+  font-weight: 600;
+}
+
+nav ul {
+  width: 60%;
+  max-width: 800px;
+  display: flex;
+  background: linear-gradient(135deg, #f1a500, #fd6f01, #bb1900);
+  box-shadow: 0px 3px 9px 0px rgb(255 255 255 / 59%);
+  list-style: none;
+  padding: 0;
+  padding: 5px;
+  margin: 20px auto;
+  border-radius: 1rem;
+  justify-content: space-evenly;
+  overflow-x: auto;
+}
+
+nav ul li {
+  font-size: large;
+  font-weight: 700;
+
+  padding: 0.6rem;
+  border-radius: 0.6rem;
+}
+nav ul li:hover {
+  background-color: #fbfbfb;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #ffffff;
+}
+nav ul li:hover a {
+  color: rgb(161, 73, 36);
+}
+
+.admin-container {
+  display: flex;
+  padding: 0 10px;
+  font-size: large;
+}
+.post-content {
+  text-overflow: ellipsis;
+  min-width: 400px;
+  text-wrap: nowrap;
+  overflow: hidden;
+}
+
+.admin-profile {
+  background: linear-gradient(135deg, #f1a500c6, #fd6e01d0, #bb1900dd),
+    url("../images/forestImg.jpg");
+  background-size: cover;
+  height: 85dvh;
+  display: flex;
+  flex-direction: column;
+  flex-basis: 25%;
+  border-radius: 1rem;
+  overflow: hidden;
+  padding: 0.6rem;
+  color: #000000cc;
+  text-align: center;
+
+  box-shadow: 0px 0px 9px 0px rgb(255 255 255 / 59%);
+}
+.profilepic {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.admin-profile .profilepic .pic {
+  background-color: #bb2d1378;
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  align-content: center;
+  filter: drop-shadow(2px 4px 6px black);
+}
+
+.admin-profile .profiledetail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 0.4;
+}
+a {
+  text-decoration: none !important;
+}
+
+.admin-profile .profiledetail .editbtn {
+  padding: 10px;
+  border-radius: 0.5rem;
+  color: #000000cc;
+  background-color: white;
+  width: max-content;
+  margin: 0 auto;
+}
+.admin-page-section {
+  flex-grow: 1;
+  padding: 0 10px;
+  margin: 0 10px;
+}
+.admin-page-section .admin-post-section {
+  max-height: 50dvh;
+  border: 1px solid #000000cc;
+  border-radius: 1rem;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  box-shadow: 0px 0px 9px 0px rgb(255 255 255 / 59%);
+  background-color: white;
+  display: flex;
+}
+table {
+  flex-grow: 1;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table td,
+th {
+  border: 0.1px solid black;
+  margin: 0;
+  padding: 10px;
+}
+.admin-section {
+  margin-bottom: 10px;
+}
+
+.admin-section a {
+  margin-left: 10px;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.admin-section a:hover {
+  text-decoration: underline;
+}
+
+footer {
+  text-align: center;
+}
