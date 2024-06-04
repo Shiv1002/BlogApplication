@@ -1,0 +1,29 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= blog.title %></title>
+  <link rel="stylesheet" href="/styles/blogCard.css" />
+</head>
+<div class="blogCard">
+  <!-- put image link below -->
+
+  <img class="pic" src="<%=blog.image_url%>" alt="<%= blog.title %>" />
+
+  <div class="metadata">
+    <a href="/blogs/<%= blog._id %>">
+      <header><%=blog.title%></header>
+    </a>
+
+    <div class="pubdetails">
+      <a href="/users/profile/<%=blog.author_id%>"
+        ><span class="author"> <%= blog.author %> </span>
+      </a>
+      &middot;
+      <span class="timestamp"
+        ><%= Intl.DateTimeFormat("en-in",{ year: 'numeric', month: 'long', day:
+        'numeric', hour: '2-digit', timeZoneName: 'short'
+        }).format(blog.publication_date) %></span
+      >
+    </div>
+  </div>
+</div>

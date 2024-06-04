@@ -1,12 +1,15 @@
-<%- include('layouts/boilerplate', {toast: toast } ) -%>
-<div>
-  <% if(!username) {%>
-  <a href="/users/login">login</a>
-  <% } else {%>
-  <h2>Welcome <%= username %>,</h2>
-  <%}%> Home page <% for(let blog of blogs) { %>
-  <li><%= blog %></li>
-  <% } %>
+<%-include('layouts/root')-%> <%- include('layouts/toasttemplate', {toast:toast}
+) -%>
 
-  <a href="Writeblog">write a blog</a>
+<link rel="stylesheet" href="/styles/home.css" />
+<div>
+  <%- include('layouts/navbar',{userid:userid}) -%>
+
+  <div class="container">
+    <h2>Recent Blogs</h2>
+    <div class="cardContainer">
+      <% blogs.forEach(function(blog) { %> <%- include('BlogCard',{blog:blog})
+      -%> <% }) %>
+    </div>
+  </div>
 </div>

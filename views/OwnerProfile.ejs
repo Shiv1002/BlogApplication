@@ -1,14 +1,59 @@
 <%- include("layouts/Profile",{user:user}) -%>
 
-<div>Hello</div>
+<body>
+  <div class="profile-container">
+    <div class="profile">
+      <% if( user._doc.photo ) {%>
+      <img
+        class="profile-pic"
+        src="<%=user._doc.photo%>"
+        alt="<%= user.username %>"
+      />
+      <div><%= user.username %></div>
 
-<% if (isOwner) { %>
+      <% } else { %>
 
-<button>Update</button>
-<button>Delete</button>
+      <div class="profile-pic">cc</div>
 
-<%} else {%>
-<a href="users/login">Login</a>
-<% } %>
+      <%}%>
+      <div class="profile-info">
+        <p><span>Name: </span><%= user.name %></p>
+        <p><span>email: </span><%= user.email %></p>
+        <p><span>Occupation: </span> <%= user.gender %></p>
+        <p><span>Blogs: <%=blogs.length%> </span></p>
+
+        <p>
+          <span>Joined Date:</span> <%=
+          Intl.DateTimeFormat('en-in').format(user.createdAt) %>
+        </p>
+      </div>
+
+      <% if (isOwner) { %>
+      <div class="profile-actions">
+        <a href="/users/edit">Edit Profile</a>
+        <a href="/users/logout">Logout</a>
+      </div>
+      <%} else {%>
+      <a href="/users/login">Login</a>
+      <% } %>
+    </div>
+    <div class="post-container">
+      <h2>Posts</h2>
+
+      <% if(!blogs.length) { %>
+      <h2 style="text-align: center; margin: 20px; color: #0a0303">
+        No posts Yet!
+      </h2>
+      <% } else {%>
+
+      <div class="card-container">
+        <% blogs.forEach(function(blog) { %> <%-
+        include('BlogCard',{blog:blog})-%> <% }) %>
+      </div>
+
+      <% } %>
+    </div>
+  </div>
+</body>
 
 <!-- this page need isOnwer:boolean and user:object as props -->

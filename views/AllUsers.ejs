@@ -1,0 +1,115 @@
+<%- include('layouts/AdminHeader') -%>
+
+<body>
+  <div class="container">
+    <div class="cardContainer">
+      <% users.forEach(user => { %>
+      <div class="user" title="<%=user.name%>">
+        <div class="usermetadata">
+          <img
+            class="cardPic"
+            src="<%=user._doc.photo%>"
+            alt="<%=user.username%>"
+          />
+          <div class="actions">
+            <a href="/admin/Block/<%=user._id%>">Block</a>
+            <a href="/users/profile/<%=user._id%>">Go to Profile</a>
+            <a href="/admin/remove/<%=user._id%>">Remove</a>
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+
+<style>
+  .cardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    justify-items: center;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .user {
+    margin: 20px 0;
+    max-width: 290px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  .user .usermetadata {
+    flex-grow: 1;
+    display: flex;
+
+    flex-direction: column;
+
+    background: linear-gradient(135deg, #f1a500, #fd6f01, #bb1900);
+  }
+
+  .actions {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .actions * {
+    padding: 10px;
+    margin: 5px;
+  }
+  .cardPic {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    margin: auto;
+  }
+  .post:last-child {
+    border-bottom: none;
+  }
+  .title {
+    font-size: 1em;
+    color: #333;
+  }
+  .content {
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  .author {
+    font-size: 0.9em;
+    color: #777;
+  }
+  .publication-date {
+    font-size: 0.8em;
+    color: #aaa;
+  }
+  .author-link {
+    color: #333;
+    text-decoration: none;
+  }
+  .author-link:hover {
+    text-decoration: underline;
+  }
+  .actions a {
+    font-family: "Poppins", sans-serif;
+    border: 0;
+    border-radius: 0.6rem;
+    background-color: rgb(239, 239, 239);
+    color: #333;
+    font-size: small;
+  }
+  .actions a:hover {
+    scale: 1.1;
+    background-color: white;
+  }
+</style>

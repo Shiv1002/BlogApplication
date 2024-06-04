@@ -1,17 +1,32 @@
-<%- include('layouts/boilerplate',{toast:toast}) -%>
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login</title>
-</head>
+<%- include('layouts/toasttemplate',{toast:toast}) -%>
+
+<link rel="stylesheet" href="/styles/login.css" />
+
 <body>
-  Login page
-  <form action="/users/login" method="post">
-    <input type="email" name="email" />
-    <input type="password" name="password" />
-    <button>submit</button>
-  </form>
-  <div>
-    <a href="/users/signup">Sign Up</a>
+  <div class="container">
+    <img class="login-image" src="/svg/login.svg" alt="" />
+
+    <div class="login-container">
+      <header>Login</header>
+      <div class="form-container">
+        <form id="loginform" method="post">
+          <input type="email" name="email" required placeholder="Email" />
+          <input
+            type="password"
+            name="password"
+            required
+            placeholder="Password"
+          />
+          <button type="submit">Login</button>
+        </form>
+        <div class="signup-link">
+          Need new account ? <a href="/users/signup">Sign up</a>
+        </div>
+        <div class="forgot-link">
+          <a href="">forgot Password ?</a>
+        </div>
+      </div>
+    </div>
   </div>
 </body>
+<script></script>

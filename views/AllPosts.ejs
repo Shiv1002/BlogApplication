@@ -1,0 +1,128 @@
+<%- include('layouts/AdminHeader') -%>
+
+<body>
+  <div class="container">
+    <div class="cardContainer">
+      <% posts.forEach(post => { %>
+      <div class="post" title="<%=post.title%>">
+        <div class="postmetadata">
+          <img
+            class="cardPic"
+            src="<%=post.image_url%>"
+            alt="<%=post.title%>"
+          />
+
+          <div class="cardlinks">
+            <span>
+              <a class="title" href="/blogs/<%=post.id%>">
+                <%= post.title %>
+              </a>
+            </span>
+
+            <span>
+              <a href="/users/profile/<%=post.author_id%>"><%=post.author %></a>
+              <span>|</span> <%= Intl.DateTimeFormat("en-in",{ year: 'numeric',
+              month: 'short', day: 'numeric', hour: '2-digit', timeZoneName:
+              'short' }).format(post.publication_date) %>
+            </span>
+          </div>
+        </div>
+
+        <!-- <div style="font-weight: 400; font-size: medium">
+          <a
+            title="block it"
+            style="color: rgb(187, 0, 0)"
+            href="/admin/block-post/<%= post.id %>"
+            onclick="return confirm('Are you sure?')"
+            >Block</a
+          >
+          <a
+            title="delete"
+            style="color: rgb(187, 0, 0)"
+            href="/admin/delete-post/<%= post.id %>"
+            onclick="return confirm('Are you sure?')"
+            >Delete</a
+          >
+        </div> -->
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+
+<style>
+  .cardContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    justify-items: center;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  .container {
+    width: 90%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .post {
+    margin: 20px 0;
+    max-width: 270px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.829);
+  }
+  .post .postmetadata {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .cardlinks {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+  .cardlinks span:first-child {
+    font-size: larger;
+    padding-bottom: 3px;
+  }
+  .cardlinks span:last-child {
+    font-size: small;
+  }
+  .cardPic {
+    flex-grow: 1;
+    flex-basis: 50%;
+  }
+  .post:last-child {
+    border-bottom: none;
+  }
+  .title {
+    font-size: 1em;
+    color: #333;
+  }
+  .content {
+    margin: 10px 0;
+    line-height: 1.6;
+  }
+  .author {
+    font-size: 0.9em;
+    color: #777;
+  }
+  .publication-date {
+    font-size: 0.8em;
+    color: #aaa;
+  }
+  .author-link {
+    color: #333;
+    text-decoration: none;
+  }
+  .author-link:hover {
+    text-decoration: underline;
+  }
+</style>
