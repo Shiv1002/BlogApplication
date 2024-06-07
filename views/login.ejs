@@ -1,32 +1,26 @@
 <%- include('layouts/toasttemplate',{toast:toast}) -%>
 
-<link rel="stylesheet" href="/styles/login.css" />
+  <link rel="stylesheet" href="/styles/login.css" />
 
-<body>
-  <div class="container">
-    <img class="login-image" src="/svg/login.svg" alt="" />
+  <body>
+    <div class="container">
 
-    <div class="login-container">
-      <header>Login</header>
-      <div class="form-container">
-        <form id="loginform" method="post">
-          <input type="email" name="email" required placeholder="Email" />
-          <input
-            type="password"
-            name="password"
-            required
-            placeholder="Password"
-          />
-          <button type="submit">Login</button>
-        </form>
-        <div class="signup-link">
-          Need new account ? <a href="/users/signup">Sign up</a>
-        </div>
-        <div class="forgot-link">
-          <a href="">forgot Password ?</a>
+      <div class="login-container">
+        <header>Login</header>
+        <div class="form-container">
+          <form id="loginform" method="post">
+            <input type="email" name="email" required placeholder="Email" />
+            <input type="password" name="password" required placeholder="Password" />
+            <button type="submit">Login</button>
+          </form>
+          <div class="signup-link">
+            Need account ? <a href="/users/signup">Sign up</a>
+          </div>
+          <div class="forgot-link">
+            <a href="">forgot Password ?</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</body>
-<script></script>
+  </body>
+  <script></script>

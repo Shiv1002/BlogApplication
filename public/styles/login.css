@@ -1,3 +1,7 @@
+:root {
+  --primary-color: #ca0000;
+  --secondary-color: #ca0000c4;
+}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -11,22 +15,24 @@ body {
   align-items: center;
   height: 100vh;
   flex-direction: column;
+  background: url("/svg/page-turner.svg");
+  background-size: cover;
 }
 
 .container {
   height: 80dvh;
-  width: 60%;
+  width: 40%;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   border-radius: 1rem;
   overflow: hidden;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.32);
   background-color: white;
 }
 .container img {
   padding: 1rem;
-  background: linear-gradient(271deg, #ffffff05, #6c63ff);
+  /* background: linear-gradient(271deg, #ffffff05, var(--secondary-color)); */
   width: 40%;
 }
 
@@ -82,7 +88,7 @@ button {
   padding: 15px;
   border: none;
   border-radius: 1rem;
-  background: #6c63ff;
+  background: var(--primary-color);
   color: #fff;
   font-size: 20px;
   cursor: pointer;
@@ -90,7 +96,7 @@ button {
 }
 
 button:hover {
-  background: #020080a7;
+  background: var(--secondary-color);
 }
 
 .signup-link,
@@ -110,4 +116,20 @@ a:hover {
 
 .toast-label {
   font-size: smaller;
+}
+
+@media screen and (width<=950px) {
+  .container {
+    width: 60%;
+  }
+}
+@media screen and (width<=700px) {
+  .container {
+    width: 75%;
+  }
+}
+@media screen and (width<=500px) {
+  .container {
+    width: 90%;
+  }
 }

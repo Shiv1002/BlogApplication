@@ -1,207 +1,166 @@
 <%- include('layouts/toasttemplate',{toast:toast}) -%>
-<link rel="stylesheet" href="/styles/signup.css" />
+  <link rel="stylesheet" href="/styles/signup.css" />
 
-<div id="container" class="container">
-  <div class="overlay hide">Processing...</div>
+  <div id="container" class="container">
+    <div class="overlay hide">Processing...</div>
+    <div class="signup-container">
+      <div class="form-container">
+        <form id="signpform" action="/users/createAccount" method="post" onsubmit="checkForm(event)"
+          enctype="multipart/form-data">
+          <h2>Create Account</h2>
+          <div class="form-group">
+            <input type="text" name="name" required placeholder="Name" minlength="3" maxlength="20" />
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" required placeholder="Email" />
+          </div>
+          <div class="form-group">
+            <input id="username" type="text" name="username" required placeholder="Username"
+              onchange="checkUsernameExist()" minlength="3" maxlength="20" />
+            <label class="toast-label" id="username-error" for="username"></label>
+          </div>
 
-  <img class="signup-image" src="/svg/signup.svg" alt="" />
-  <div class="signup-container">
-    <div class="form-container">
-      <form
-        id="signpform"
-        action="/users/createAccount"
-        method="post"
-        onsubmit="checkForm(event)"
-        enctype="multipart/form-data"
-      >
-        <h2>Create Account</h2>
-        <div class="form-group">
-          <input
-            type="text"
-            name="name"
-            required
-            placeholder="Name"
-            minlength="3"
-            maxlength="20"
-          />
+          <div class="form-group">
+            <input id="ProfileImg" type="file" name="image" required placeholder="add Profile image" />
+          </div>
+          <div class="form-group">
+            <select name="Occupation" required>
+              <option value="" disabled selected>Occupation</option>
+              <option value="male">Professional</option>
+              <option value="female">Student</option>
+              <option value="others">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input id="password" type="password" name="password" required placeholder="Password" minlength="8" />
+          </div>
+          <div class="form-group">
+            <input id="confirm-password" type="password" name="confirm-password" required placeholder="Confirm Password"
+              onchange="checkPassword()" minlength="8" />
+          </div>
+          <div class="form-group">
+            <button id="submit-btn" type="submit">Submit</button>
+          </div>
+        </form>
+        <div class="" style="text-align: center">
+          Already have account ? <a href="/users/login">Sign In</a>
         </div>
-        <div class="form-group">
-          <input type="email" name="email" required placeholder="Email" />
-        </div>
-        <div class="form-group">
-          <input
-            id="username"
-            type="text"
-            name="username"
-            required
-            placeholder="Username"
-            onchange="checkUsernameExist()"
-            minlength="3"
-            maxlength="20"
-          />
-          <label class="toast-label" id="username-error" for="username"></label>
-        </div>
-
-        <div class="form-group">
-          <input
-            id="ProfileImg"
-            type="file"
-            name="image"
-            required
-            placeholder="add Profile image"
-          />
-        </div>
-        <div class="form-group">
-          <select name="Occupation" required>
-            <option value="" disabled selected>Occupation</option>
-            <option value="male">Professional</option>
-            <option value="female">Student</option>
-            <option value="others">Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <input
-            id="password"
-            type="password"
-            name="password"
-            required
-            placeholder="Password"
-            minlength="8"
-          />
-        </div>
-        <div class="form-group">
-          <input
-            id="confirm-password"
-            type="password"
-            name="confirm-password"
-            required
-            placeholder="Confirm Password"
-            onchange="checkPassword()"
-            minlength="8"
-          />
-        </div>
-        <div class="form-group">
-          <button id="submit-btn" type="submit">Submit</button>
-        </div>
-      </form>
-      <div class="" style="text-align: center">
-        Already have account ? <a href="/users/login">Sign In</a>
       </div>
     </div>
   </div>
-</div>
 
-<style>
-  .overlay {
-    position: absolute;
-    display: grid;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(10px);
-    z-index: 10;
-    font-size: xx-large;
-    /* color: aliceblue; */
-    justify-items: center;
-    align-items: center;
-  }
-  .hide {
-    display: none;
-  }
-</style>
-
-<script>
-  let usernameEle = document.getElementById("username");
-  let label = document.getElementById("username-error");
-  let submitBtn = document.getElementById("submit-btn");
-  let overlayEle = document.getElementsByClassName("hide")[0];
-  let usernameIsCorrect = false;
-  let passwordIsCorrect = false;
-  let signupContainer = document.getElementById("container");
-
-  document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("signpform").reset();
-    console.log("reset form");
-  });
-
-  function setIsLoading() {
-    overlayEle.classList.toggle("hide");
-  }
-
-  function checkForm(event) {
-    if (passwordIsCorrect && usernameIsCorrect) {
-      setIsLoading();
-      return true;
+  <style>
+    .overlay {
+      position: absolute;
+      display: grid;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(10px);
+      z-index: 10;
+      font-size: xx-large;
+      /* color: aliceblue; */
+      justify-items: center;
+      align-items: center;
     }
 
-    event.preventDefault();
-    return false;
-  }
-
-  function checkPassword() {
-    let passwordEle = document.getElementById("password");
-    let confimpasswordEle = document.getElementById("confirm-password");
-    if (
-      passwordEle.value &&
-      confimpasswordEle.value &&
-      passwordEle.value === confimpasswordEle.value
-    ) {
-      passwordIsCorrect = true;
-      confimpasswordEle.style.border = "1px solid green";
-    } else {
-      passwordIsCorrect = false;
-      confimpasswordEle.style.border = "1px solid red";
+    .hide {
+      display: none;
     }
-  }
-  function usernameNotExist() {
-    label.style.color = "green";
-    label.innerHTML = "Username available";
-    usernameEle.style.border = "1px solid green";
-    usernameIsCorrect = true;
-  }
+  </style>
 
-  function usernameExist() {
-    label.style.color = "red";
-    label.innerHTML = "Username not available";
-    usernameEle.style.border = "1px solid red";
-    usernameIsCorrect = false;
-  }
-  // throttle funt
-  function checkUsernameThrottled() {
-    // to check already invked func
-    let timer = null;
-    return () => {
-      let uname = document.getElementById("username").value;
-      if (uname == "") return;
-      // no execution if already executed
-      if (!timer) {
-        timer = setTimeout(() => {
-          console.log("Checking username...", uname);
-          fetch("http://localhost:3000/users/checkusername", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              searchTerm: uname,
-            }),
-          })
-            .then((res) => res.json())
-            .then((response) => {
-              if (response.userExist) {
-                usernameExist();
-              } else {
-                usernameNotExist();
-              }
-            })
-            .catch((error) => {
-              console.error("Error:", error.message);
-            });
+  <script>
+    let usernameEle = document.getElementById("username");
+    let label = document.getElementById("username-error");
+    let submitBtn = document.getElementById("submit-btn");
+    let overlayEle = document.getElementsByClassName("hide")[0];
+    let usernameIsCorrect = false;
+    let passwordIsCorrect = false;
+    let signupContainer = document.getElementById("container");
 
-          timer = null;
-        }, 2000); //2 sec timeout
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("signpform").reset();
+      console.log("reset form");
+    });
+
+    function setIsLoading() {
+      overlayEle.classList.toggle("hide");
+    }
+
+    function checkForm(event) {
+      if (passwordIsCorrect && usernameIsCorrect) {
+        setIsLoading();
+        return true;
       }
-    };
-  }
 
-  let checkUsernameExist = checkUsernameThrottled();
-</script>
+      event.preventDefault();
+      return false;
+    }
+
+    function checkPassword() {
+      let passwordEle = document.getElementById("password");
+      let confimpasswordEle = document.getElementById("confirm-password");
+      if (
+        passwordEle.value &&
+        confimpasswordEle.value &&
+        passwordEle.value === confimpasswordEle.value
+      ) {
+        passwordIsCorrect = true;
+        confimpasswordEle.style.border = "1px solid green";
+      } else {
+        passwordIsCorrect = false;
+        confimpasswordEle.style.border = "1px solid red";
+      }
+    }
+    function usernameNotExist() {
+      label.style.color = "green";
+      label.innerHTML = "Username available";
+      usernameEle.style.border = "1px solid green";
+      usernameIsCorrect = true;
+    }
+
+    function usernameExist() {
+      label.style.color = "red";
+      label.innerHTML = "Username not available";
+      usernameEle.style.border = "1px solid red";
+      usernameIsCorrect = false;
+    }
+    // throttle funt
+    function checkUsernameThrottled() {
+      // to check already invked func
+      let timer = null;
+      return () => {
+        let uname = document.getElementById("username").value;
+        if (uname == "") return;
+        // no execution if already executed
+        if (!timer) {
+          timer = setTimeout(() => {
+            console.log("Checking username...", uname);
+            fetch("http://localhost:3000/users/checkusername", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                searchTerm: uname,
+              }),
+            })
+              .then((res) => res.json())
+              .then((response) => {
+                if (response.userExist) {
+                  usernameExist();
+                } else {
+                  usernameNotExist();
+                }
+              })
+              .catch((error) => {
+                console.error("Error:", error.message);
+              });
+
+            timer = null;
+          }, 2000); //2 sec timeout
+        }
+      };
+    }
+
+    let checkUsernameExist = checkUsernameThrottled();
+  </script>
