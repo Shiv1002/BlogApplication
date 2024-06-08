@@ -140,6 +140,14 @@ export const createAccount = async (req, res, next) => {
     });
   }
 
+  let filteredKeys = Object.keys(req.body).filter(
+    (ele) => ele != "confirm-password"
+  );
+  let filteredBody = filteredKeys.reduce((obj, key) => {
+    return { ...obj, [key]: req.body[key] };
+  }, {});
+
+  req.body = filteredBody;
   let new_user = await User({
     ...req.body,
     photo: req.body.url,
@@ -160,7 +168,7 @@ export const createAccount = async (req, res, next) => {
       // set current user session
       setSessionUser(user, req, res, next);
 
-      return res.redirect("/login");
+      return res.redirect("login");
     }
   });
 
