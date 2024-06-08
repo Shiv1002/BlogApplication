@@ -54,3 +54,9 @@ nav > div {
 .user-nav:hover .user-action {
   display: block;
 }
+
+@media screen and (width<=500px) {
+  .user-nav .login-pill {
+    font-size: smaller;
+  }
+}
