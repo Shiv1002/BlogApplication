@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/styles/blogCard.css" />
 <div class="blogCard">
   <!-- put image link below -->
 
@@ -24,3 +23,64 @@
     </div>
   </div>
 </div>
+<style>
+  header {
+    font-size: x-large;
+    margin-bottom: 0.3rem;
+  }
+
+  .blogCard {
+    min-height: 40vh;
+    max-height: 50vh;
+    background-color: transparent;
+    margin: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+
+  .blogCard .pic {
+    width: 100%;
+    flex-grow: 1;
+    max-height: 70%;
+    background-color: rgb(195, 195, 195);
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+
+  .metadata {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    /* height: 20%; */
+  }
+
+  header {
+    font-size: x-large;
+  }
+
+  a {
+    color: #242424;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .metadata {
+    font-weight: 700;
+  }
+
+  .pubdetails {
+    font-size: 1em;
+  }
+
+  .author-link {
+    text-decoration: none;
+  }
+
+  .author-link:hover {
+    text-decoration: underline;
+  }
+</style>
