@@ -19,7 +19,7 @@ export const admin = async (req, res, next) => {
   let adminBlogs = await Blog.find({ author_id: admin._id }).sort({
     publication_date: -1,
   });
-  res.render("admin", { visits, admin, users, posts: blogs, adminBlogs });
+  res.render("Admin", { visits, admin, users, posts: blogs, adminBlogs });
 };
 
 export const getAllPosts = async (req, res, next) => {

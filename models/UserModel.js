@@ -46,9 +46,9 @@ export const userSchema = mongoose.Schema(
       type: String,
     },
     blogs: [String],
-    profile_photo: {
-      data: Buffer,
-      contentType: String,
+    photo: {
+      required: [true, "photo is required"],
+      type: String,
     },
   },
   {
@@ -72,8 +72,6 @@ export const userSchema = mongoose.Schema(
 
 // before saving data
 userSchema.pre("save", async function () {
-  console.log("saving in database!!");
-
   // encrypting the password before saving
   let encPassword = await bcrypt.hash(this.password, saltRounds);
 

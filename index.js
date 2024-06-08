@@ -22,6 +22,8 @@ import { isAdmin } from "./middlewares/isAdmin.js";
 import { admin } from "./controllers/AdminController.js";
 import appclass from "./data/App.js";
 import adminRouter from "./routes/AdminRoute.js";
+import asyncHandler from "express-async-handler";
+import mongoStore from "./data/MongoSessionStore.js";
 // import { storage } from "./data/cloudinary.js";
 
 cloudinary.v2.config({
@@ -33,17 +35,20 @@ cloudinary.v2.config({
 let webview = 0;
 const app = e();
 const PORT = process.env.PORT || 3000;
-
+const __dirname = import.meta.dirname;
 app.use(flash());
 app.set("view engine", "ejs");
 
+app.use(e.static(path.join(__dirname, "public")));
+app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(e.static("./public"));
+
 app.use(json());
 app.use(cors());
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
+    store: mongoStore,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -53,39 +58,47 @@ app.use(
   })
 );
 
-app.get("/", async (req, res) => {
-  appclass.updateVisit();
-  // access to previous flash messages
-  let toast = { ...req.flash("info")[0] };
-  let blogs = await getAllBlogs();
-  res.render("home", {
-    username: req.session.username,
-    userid: req.session.userid,
-    blogs: blogs,
-    toast: toast,
-  });
-});
+app.get(
+  "/",
+  asyncHandler(async (req, res) => {
+    appclass.updateVisit();
+    // access to previous flash messages
+    let toast = { ...req.flash("info")[0] };
+    let blogs = await getAllBlogs();
+    res.render("home", {
+      username: req.session.username,
+      userid: req.session.userid,
+      blogs: blogs,
+      toast: toast,
+    });
+  })
+);
 app.use(mongoSanitize());
 
-app.use("/writeblog", (req, res, next) => {
-  if (!req.session.username) {
-    req.flash("info", { text: "You have to Login first!!", type: "warning" });
-    return res.redirect("users/login");
-  }
+app.use(
+  "/writeblog",
+  asyncHandler((req, res, next) => {
+    if (!req.session.username) {
+      req.flash("info", { text: "You have to Login first!!", type: "warning" });
+      return res.redirect("users/login");
+    }
 
-  res.render("WriteBlog", {
-    username: req.session.username,
-    toast: { ...req.flash("info")[0] },
-  });
-});
-app.use("/blogs", BlogRouter);
+    res.render("WriteBlog", {
+      username: req.session.username,
+      toast: { ...req.flash("info")[0] },
+    });
+  })
+);
+app.use("/blogs", asyncHandler(BlogRouter));
 
-app.use("/users", userRouter);
+app.use("/users", asyncHandler(userRouter));
 
-app.get("/error", (req, res, next) => {
+app.get((err, req, res, next) => {
   res.render("Error", { err: { message: req.flash("error")[0] } });
 });
-
+app.use((req, res, next) => {
+  res.render("Error", { err: { message: "Page not found" } });
+});
 app.use(errorMiddleware);
 
 // connect with DB

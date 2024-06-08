@@ -39,8 +39,8 @@ userRouter.get("/logout", (req, res, next) => {
       console.log(err);
       return res.redirect("/"); // or handle the error appropriately
     }
+    return res.redirect("/");
   });
-  res.redirect("/");
 });
 
 userRouter.route("/profile/:id").get(getProfile, isOwner, async (req, res) => {
