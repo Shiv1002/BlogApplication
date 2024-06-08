@@ -71,10 +71,12 @@ export const getBlog = async (req, res, next) => {
   const { id } = req.params;
   // console.log(id, "search");
   const blog = await Blog.findById(id).catch((e) => {
-    return res.render("Error", { err: e });
+    return res.render("PageNotFound", { err: e });
   });
   if (lod.isEmpty(blog)) {
-    return res.render("Error", { err: { message: "No Such Blog exists" } });
+    return res.render("PageNotFound", {
+      err: { message: "No Such Blog exists" },
+    });
   }
   req.flash("info");
   res.data = { blog: blog };

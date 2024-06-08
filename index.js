@@ -96,10 +96,10 @@ app.use("/users", asyncHandler(userRouter));
 app.use("/admin", isAdmin, adminRouter);
 
 app.get((err, req, res, next) => {
-  res.render("Error", { err: { message: req.flash("error")[0] } });
+  res.render("PageNotFound", { err: { message: req.flash("error")[0] } });
 });
 app.use((req, res, next) => {
-  res.render("Error", { err: { message: "Page not found" } });
+  res.render("PageNotFound", { err: { message: "Page not found" } });
 });
 app.use(errorMiddleware);
 
