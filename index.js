@@ -93,6 +93,8 @@ app.use("/blogs", asyncHandler(BlogRouter));
 
 app.use("/users", asyncHandler(userRouter));
 
+app.use("/admin", isAdmin, adminRouter);
+
 app.get((err, req, res, next) => {
   res.render("Error", { err: { message: req.flash("error")[0] } });
 });
@@ -103,8 +105,6 @@ app.use(errorMiddleware);
 
 // connect with DB
 connectDB();
-
-app.use("/admin", isAdmin, adminRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT} 🔥`);
