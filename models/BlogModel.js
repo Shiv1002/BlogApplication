@@ -15,10 +15,10 @@ const blogSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+
     author_id: {
       type: String,
       required: true,
-      unique: true,
       immutablity: true,
       index: true,
     },
