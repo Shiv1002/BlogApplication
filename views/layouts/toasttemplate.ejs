@@ -1,126 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BlogSphere</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="toast-container">
-      <% if(toast.text) {%>
-      <div
-        id="toast-data"
-        data-message-text="<%= toast.text %>"
-        data-message-type="<%= toast.type %>"
-      ></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlogSphere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div id="toast-container">
+    <% if(toast.text) {%>
+      <div id="toast-data" data-message-text="<%= toast.text %>" data-message-type="<%= toast.type %>"></div>
       <% } %>
-    </div>
+  </div>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const toastData = document.getElementById("toast-data");
-        if (toastData) {
-          const messageText = toastData.getAttribute("data-message-text");
-          const messageType = toastData.getAttribute("data-message-type");
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const toastData = document.getElementById("toast-data");
+      if (toastData) {
+        const messageText = toastData.getAttribute("data-message-text");
+        const messageType = toastData.getAttribute("data-message-type");
 
-          if (messageText) {
-            showToast(messageText, messageType, 3000);
-          }
+        if (messageText) {
+          showToast(messageText, messageType, 3000);
         }
-      });
-
-      function showToast(text, type = "info", duration = 3000) {
-        const toastContainer = document.getElementById("toast-container");
-
-        const toast = document.createElement("div");
-        toast.className = `toast ${type}`;
-        toast.textContent = text;
-
-        toastContainer.appendChild(toast);
-
-        // Show the toast
-        setTimeout(() => {
-          toast.classList.add("show");
-        }, 200);
-
-        // Hide the toast after the specified duration
-        setTimeout(() => {
-          toast.classList.remove("show");
-          toast.classList.add("hide");
-        }, duration);
-
-        // Remove the toast from the DOM
-        setTimeout(() => {
-          toastContainer.removeChild(toast);
-        }, duration + 500);
       }
-    </script>
-    <!-- boilerplate style -->
-    <style>
-      :root {
-        font-family: "Poppins", sans-serif !important;
-      }
-      /* styles.css */
+    });
 
-      #toast-container {
-        position: fixed;
-        top: 20px;
+    function showToast(text, type = "info", duration = 3000) {
+      const toastContainer = document.getElementById("toast-container");
 
-        width: 100dvw;
-        z-index: 1000;
-      }
+      const toast = document.createElement("div");
+      toast.className = `toast ${type}`;
+      toast.textContent = text;
 
-      .toast {
-        display: flex;
-        align-items: center;
-        background-color: #333;
-        color: #fff;
-        padding: 8px 16px;
-        margin-bottom: 10px;
-        border-radius: 2px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        opacity: 0;
-        transition: opacity 0.3s, transform 0.3s;
-        margin: 0 auto;
-        width: fit-content;
-        font-weight: 700;
-      }
-      .toast {
-        opacity: 0;
-        transform: translateY(-200px);
-      }
-      .toast.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      toastContainer.appendChild(toast);
 
-      .toast.hide {
-        opacity: 0;
-        transform: translateY(-200px);
-      }
+      // Show the toast
+      setTimeout(() => {
+        toast.classList.add("show");
+      }, 200);
 
-      .toast.success {
-        background-color: #4caf50;
-      }
+      // Hide the toast after the specified duration
+      setTimeout(() => {
+        toast.classList.remove("show");
+        toast.classList.add("hide");
+      }, duration);
 
-      .toast.error {
-        background-color: #f44336;
-      }
+      // Remove the toast from the DOM
+      setTimeout(() => {
+        toastContainer.removeChild(toast);
+      }, duration + 500);
+    }
+  </script>
+  <!-- boilerplate style -->
+  <style>
+    :root {
+      font-family: "Poppins", sans-serif !important;
+    }
 
-      .toast.warning,
-      .toast.danger {
-        background-color: #ff9800;
-      }
+    /* styles.css */
 
-      .toast.info {
-        background-color: #2196f3;
-      }
-    </style>
-  </body>
+    #toast-container {
+      position: fixed;
+      top: 20px;
+
+      width: 100dvw;
+      z-index: 1000;
+    }
+
+    .toast {
+      display: flex;
+      align-items: center;
+      background-color: #333;
+      color: #fff;
+      padding: 8px 16px;
+      margin-bottom: 10px;
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transition: opacity 0.3s, transform 0.3s;
+      margin: 0 auto;
+      width: fit-content;
+      font-weight: 700;
+    }
+
+    .toast {
+      opacity: 0;
+      transform: translateY(-200px);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.hide {
+      opacity: 0;
+      transform: translateY(-200px);
+    }
+
+    .toast.success {
+      background-color: #4caf50;
+    }
+
+    .toast.error {
+      background-color: #f44336;
+    }
+
+    .toast.warning,
+    .toast.danger {
+      background-color: #ff9800;
+    }
+
+    .toast.info {
+      background-color: #2196f3;
+    }
+
+    ::-webkit-scrollbar {
+      width: 5px;
+      background-color: transparent;
+      height: 0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: rgb(200, 200, 200);
+      border-radius: 1rem;
+    }
+  </style>
+</body>
+
 </html>

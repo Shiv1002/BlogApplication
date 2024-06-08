@@ -1,6 +1,6 @@
 .cardContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
 }
 
 body {
@@ -13,7 +13,7 @@ body {
   width: 90%;
   margin: auto;
   overflow: hidden;
-  padding: 20px;
+  padding: 10px;
 }
 .container > h2 {
   color: white;
@@ -32,4 +32,12 @@ body {
 .content {
   margin: 10px 0;
   line-height: 1.6;
+}
+
+@media screen and (width<=500px) {
+  .container {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: small;
+  }
 }

@@ -4,25 +4,38 @@
     <div class="landing-title">Blogshpere</div>
     <div class="user-nav">
       <% if(!userid) {%>
-      <div class="nav-group">
-        <a href="/users/login">Login</a>
-      </div>
+        <div class="nav-group">
+          <a href="/users/login" style="color: #1c1b1b;
+          padding: 0.6rem 1rem;
+          border-radius: 2rem;
+          background: aliceblue; :hover{background-color: #1c1b1b;}">Login</a>
+        </div>
 
-      <% } else {%>
+        <% } else {%>
 
-      <div class="nav-group">
-        <a href="/users/profile/<%= userid %>" title="profile">
-          <img src="/svg/user-alt.svg" alt="profile"
-        /></a>
-      </div>
-      <div class="nav-group">
-        <a href="Writeblog" title="write a blog">Write a blog</a>
-      </div>
-      <div class="nav-group">
-        <a href="/users/logout" title="logout">Logout</a>
-      </div>
+          <div class="nav-group">
 
-      <%}%>
+            <img src="/svg/user-alt.svg" alt="profile" />
+            <div class="user-action">
+              <div>
+                <a href="/users/profile/<%= userid %>" title="profile">
+                  Profile
+                </a>
+              </div>
+
+              <div class="nav-group">
+                <a href="Writeblog" title="write a blog">Write a blog</a>
+              </div>
+              <div class="nav-group">
+                <a href="/users/logout" title="logout">Logout</a>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <%}%>
     </div>
   </div>
 </nav>

@@ -3,14 +3,13 @@ header {
   margin-bottom: 0.3rem;
 }
 .blogCard {
-  width: 400px;
-  height: 50vh;
+  min-height: 40vh;
+  max-height: 50vh;
   background-color: transparent;
-
-  overflow-y: auto;
-  margin: 1rem;
+  margin: 0.6rem;
   display: flex;
   flex-direction: column;
+  width: auto;
 }
 
 .blogCard .pic {

@@ -6,26 +6,6 @@ nav {
   font-weight: 600;
   top: 0;
 }
-
-@font-face {
-  font-family: "Sunday";
-  src: url("../fonts/sunday/Sunday.otf") format("opentype");
-}
-
-nav a,
-nav a:hover {
-  text-decoration: none;
-}
-nav .nav-group {
-  padding: 0.6rem;
-  border-radius: 2rem;
-  background-color: rgba(251, 251, 251, 0.876);
-  margin: 0 10px;
-}
-nav .nav-group:hover {
-  background-color: rgba(251, 251, 251, 0.627);
-}
-
 .landing-title {
   position: absolute;
   font-size: 2.4em;
@@ -33,22 +13,44 @@ nav .nav-group:hover {
   font-family: "Sunday", sans-serif;
   letter-spacing: 4px;
 }
+
 nav > div {
   display: flex;
   height: 5.5rem;
   justify-content: center;
   align-items: center;
 }
-nav > div > * {
-  padding: 15px;
+
+@font-face {
+  font-family: "Sunday";
+  src: url("../fonts/sunday/Sunday.otf") format("opentype");
 }
-.user-nav img {
-  width: 2rem;
+.user-nav .nav-group img {
+  height: 2rem;
 }
+.user-nav .nav-group img svg {
+  fill: white;
+}
+
 .user-nav {
-  margin: 0 0 0 auto;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
   box-sizing: border-box;
+  text-align: end;
+}
+.user-nav .nav-group .user-action {
+  display: none;
+  border-radius: 0.6rem;
+  text-align: center;
+  background-color: rgb(243, 249, 255);
+  margin: 0.6rem 0;
+}
+.user-nav .nav-group .user-action div {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.36);
+}
+
+.user-nav:hover .user-action {
+  display: block;
 }

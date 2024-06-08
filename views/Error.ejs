@@ -2,45 +2,54 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 - Error</title>
-    <style>
-      body {
-        text-align: center;
-        background-color: #f0f0f0;
-      }
-      .container {
-        max-width: 400px;
-        margin: 40px auto;
-        padding: 20px;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      #Error {
-        font-size: 36px;
-        font-weight: bold;
-        color: red;
-      }
-      a {
-        text-decoration: none;
-        color: #337ab7;
-      }
-      a:hover {
-        color: #23527c;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1 id="Error"><%= err.message || 'Error' %></h1>
-      <p>Something went wrong...</p>
-      <a href="/">Go to Home</a>
-    </div>
-    <script>
-      console.log(document.getElementById("Error").innerHTML);
-    </script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Error</title>
+  <style>
+    body {
+      text-align: center;
+      background-color: #f0f0f0;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #Error {
+      font-size: 36px;
+      font-weight: bold;
+      color: red;
+    }
+
+    a {
+      text-decoration: none;
+      color: #337ab7;
+    }
+
+    a:hover {
+      color: #23527c;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 id="Error">
+      <%= err.message || 'Error' %>
+    </h1>
+    <p>Something went wrong...</p>
+    <a href="/">Go to Home</a>
+  </div>
+  <script>
+
+  </script>
+</body>
+
 </html>
