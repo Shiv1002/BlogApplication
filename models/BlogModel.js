@@ -20,7 +20,6 @@ const blogSchema = mongoose.Schema(
       type: String,
       required: true,
       immutablity: true,
-      index: true,
     },
     publication_date: {
       type: Date,
