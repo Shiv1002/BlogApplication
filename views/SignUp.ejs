@@ -135,7 +135,7 @@
         if (!timer) {
           timer = setTimeout(() => {
             console.log("Checking username...", uname);
-            fetch("http://localhost:3000/users/checkusername", {
+            fetch("/users/checkusername", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
