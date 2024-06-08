@@ -10,7 +10,7 @@ export const connectDB = () => {
       useCreateIndex: true,
     })
     .then(() => {
-      console.log(`Connection with ${process.env.MONGODB_URI} success🔥`);
+      console.log(`Connection with db success🔥`);
     })
     .catch((e) => {
       console.log(e.message);
