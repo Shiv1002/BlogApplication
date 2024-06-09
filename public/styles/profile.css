@@ -52,8 +52,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /* overflow: auto; */
-  /* min-height: 44dvh; */
   margin: 1rem;
 }
 
@@ -71,6 +69,7 @@ body {
   display: grid;
   overflow-y: auto;
 }
+
 .card-container > * {
   height: 300px;
 }
