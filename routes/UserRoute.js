@@ -7,7 +7,7 @@ import {
   updateAccount,
   checkUsername,
 } from "../controllers/UserController.js";
-import { isOwner } from "../middlewares/isOwner.js";
+import { isProfileOwner } from "../middlewares/isProfileOwner .js";
 import { Blog } from "../models/BlogModel.js";
 import { isAdmin } from "../middlewares/isAdmin.js";
 import { uploadImage } from "../middlewares/UploadImge.js";
@@ -43,18 +43,21 @@ userRouter.get("/logout", (req, res, next) => {
   });
 });
 
-userRouter.route("/profile/:id").get(getProfile, isOwner, async (req, res) => {
-  // console.log(res.isOwner, "isowner");
-  // retrive all blogs
-  let allBlogs = await Blog.find({ author_id: res.data.user._id });
-  if (res.isOwner)
-    res.render("OwnerProfile", {
-      user: res.data.user,
-      blogs: allBlogs,
-      isOwner: res.isOwner,
-    });
-  else res.render("Profile", { user: res.data.user, blogs: allBlogs });
-});
+userRouter
+  .route("/profile/:id")
+  .get(getProfile, isProfileOwner, async (req, res) => {
+    // console.log(res.isOwner, "isowner");
+    // retrive all blogs
+    const author_id = String(req.params.id);
+    let allBlogs = await Blog.find({ author_id: author_id });
+    if (res.isProfileOwner)
+      res.render("OwnerProfile", {
+        user: res.data.user,
+        blogs: allBlogs,
+        isProfileOwner: res.isProfileOwner,
+      });
+    else res.render("Profile", { user: res.data.user, blogs: allBlogs });
+  });
 
 // frequeny call - high
 userRouter.post("/checkusername", checkUsername);
@@ -66,9 +69,9 @@ userRouter.post(
   createAccount
 );
 
-userRouter.put("/updateAccount", isOwner, updateAccount);
+userRouter.put("/updateAccount", isProfileOwner, updateAccount);
 
 // deleteAcc requires email
-userRouter.delete("/deleteAccount", isOwner, deleteAccount);
+userRouter.delete("/deleteAccount", isProfileOwner, deleteAccount);
 
 export default userRouter;

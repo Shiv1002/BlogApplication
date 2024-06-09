@@ -5,6 +5,10 @@ export const uploadImage = async (req, res, next) => {
   //   console.log(req.body, req.file, "file i got");
 
   try {
+    // no file upload
+    if (!req.file) {
+      return next();
+    }
     // // Upload image to Cloudinary
     // console.log(req.file);
     // req.file will have buffer data

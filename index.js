@@ -63,6 +63,7 @@ app.get(
   asyncHandler(async (req, res) => {
     appclass.updateVisit();
     // access to previous flash messages
+
     let toast = { ...req.flash("info")[0] };
     let blogs = await getAllBlogs();
     res.render("home", {

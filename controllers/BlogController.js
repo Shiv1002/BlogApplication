@@ -25,7 +25,6 @@ export const updateBlogView = async (req, res, next) => {
     }
   });
 };
-
 // search a blog - high
 export const searchBlogs = async (req, res, next) => {
   let { term } = req.params;
@@ -61,10 +60,49 @@ export const postBlog = async (req, res, next) => {
     }
   });
 };
+//
+export const getUpdateBlogPage = async (req, res, next) => {
+  const { blogid } = req.params;
+  // console.log("updating", blogid);
+  const blog = await Blog.findById(blogid).catch((e) => {
+    return res.render("PageNotFound", { err: e });
+  });
+  if (lod.isEmpty(blog)) {
+    return res.render("PageNotFound", {
+      err: { message: "No Such Blog exists" },
+    });
+  }
 
+  return res.render("UpdateBlog", {
+    blog: blog,
+    toast: {},
+  });
+};
 // update a blog - very low
-export const updateBlog = () => {
-  let { blogid, newBlogContent } = req.body;
+export const updateBlog = async (req, res, next) => {
+  const { blogTitle, blogContent, url } = req.body;
+  const { blogid } = req.params;
+
+  let newBlog = {
+    title: blogTitle,
+    contents: blogContent,
+  };
+  if (url) {
+    newBlog = {
+      ...newBlog,
+      image_url: url,
+    };
+  }
+
+  newBlog = await Blog.findByIdAndUpdate(blogid, {
+    ...newBlog,
+  }).catch((e) => {
+    return res.render("PageNotFound", {
+      err: { text: "Something went wrong" },
+    });
+  });
+
+  return res.redirect(`/blogs/${blogid}`);
 };
 
 export const getBlog = async (req, res, next) => {
@@ -93,13 +131,13 @@ export const getBlog = async (req, res, next) => {
   // const options1 = { year: 'numeric', month: 'long', day: 'numeric' }; // May 27, 2024
   // const options2 = { year: 'numeric', month: '2-digit', day: '2-digit' }; // 05/27/2024
   // const options3 = { year: 'numeric', month: 'short', day: 'numeric' }; // May 27, 2024
-
+  req.session.author_id = blog.author_id;
   res.render("Blog", {
     blog: {
       ...blog._doc,
       publication_date: formatdate,
     },
-
+    isBlogOwner: blog.author_id == req.session.userid,
     toast: {},
   });
 };

@@ -1,0 +1,106 @@
+<%- include('layouts/toasttemplate', {toast: toast } ) -%>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Write your blog</title>
+        <link rel="stylesheet" href="/styles/writeblog.css" />
+    </head>
+
+    <body>
+        <div class="overlay hide">Updating...</div>
+        <div class="container">
+            <h2>Update Blog</h2>
+            <div class="card-container">
+                <div class="form-container">
+                    <form id="writeblog" action="/blogs/updateblog/<%=blog._id%>" method="post"
+                        enctype="multipart/form-data" onsubmit="showOverlay()">
+                        <input id="inputfile" type="file" name="blogImage" accept=".jpg,.jpeg,.png" />
+                        <input id="inputheader" type="text" name="blogTitle" value="<%=blog.title%>" required
+                            placeholder="Blog Title" minlength="5" maxlength="100" />
+                        <textarea id="inputcontent" name="blogContent" required
+                            placeholder="Write your blog content here..."><%=blog.contents%></textarea>
+                        <div>
+                            <button>Update Blog</button>
+                            <button style="background-color: rgb(124, 201, 0);"
+                                onclick="cancelForm(event)">Cancel</button>
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="preview-container">
+
+                    <img id="previewimage" name="blogImage" src="<%=blog.image_url%>" alt="Add image" />
+                    <h2 id="previewheader" name="blogTitle">
+                        <%=blog.title%>
+                    </h2>
+
+                    <div>author: <span><strong>
+                                <%=blog.author%>
+                            </strong></span></div>
+
+                    <pre id="previewcontent" name="blogContent"><%=blog.contents%></pre>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        function showOverlay() {
+            document.querySelector('.hide').classList.toggle('hide')
+        }
+        function cancelForm(e) {
+            e.preventDefault()
+            location.assign('/')
+        }
+        let inputheader = document.querySelector('#inputheader')
+        let textareaEle = document.querySelector('textarea')
+        let previewImg = document.querySelector('#previewimage')
+        let previewHeader = document.querySelector('#previewheader')
+        let previewContent = document.querySelector('#previewcontent')
+
+        let timer = null;
+        function throttle() {
+            if (timer) return;
+            timer = setTimeout(() => {
+                previewForm()
+
+                timer = null;
+            }, 2000)
+        }
+
+        inputheader.addEventListener('input', (e) => {
+
+            throttle()
+
+        })
+
+        textareaEle.addEventListener('input', (e) => {
+            throttle()
+        })
+
+
+        function previewForm(e) {
+            console.log('previewing')
+
+            previewHeader.innerHTML = document.querySelector('#inputheader').value
+            previewContent.innerHTML = textareaEle.value
+
+
+
+        }
+
+        const fileInput = document.querySelector('#inputfile');
+        // const preview = document.getElementById('preview');
+        fileInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImg.src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+    </script>

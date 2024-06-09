@@ -41,6 +41,31 @@
         box-sizing: border-box;
       }
 
+      .user-actions {
+        display: flex;
+        align-items: center;
+      }
+
+      .update-blog-span {
+        margin-left: auto;
+      }
+
+      .update-blog-span button {
+        background-color: #ca0000c4;
+        border-radius: 1rem;
+        border: none;
+        padding: 0.6rem 1rem;
+      }
+
+      .update-blog-span button a {
+        font-family: inherit;
+        text-decoration: none;
+        color: whitesmoke;
+        font-size: larger;
+        padding: inherit;
+
+      }
+
       h1 {
         color: #333;
         border-bottom: 2px solid #eaeaea;
@@ -141,6 +166,14 @@
               <%=blog.views%>
             </span>
           </span>
+          <%if(isBlogOwner){%>
+            <span class="update-blog-span">
+              <button>
+                <a href="updateblog/<%=blog._id%>">Update</a>
+              </button>
+            </span>
+            <%}%>
+
         </div>
       </div>
       <div class="content">
